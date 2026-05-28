@@ -1,6 +1,6 @@
 "use client"
 
-// Latest optimized layout with desktop grids and price text fixes
+// Latest optimized layout with desktop grids and p.rice text fixes
 import { useState } from 'react'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
