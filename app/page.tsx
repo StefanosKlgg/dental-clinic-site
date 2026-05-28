@@ -1,12 +1,12 @@
 "use client"
 
+// Latest optimized layout with desktop grids and price text fixes
 import { useState } from 'react'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { HeroSection } from '@/components/sections/hero-section'
 import { ServicesSection } from '@/components/sections/services-section'
 import { BeforeAfterSection } from '@/components/sections/before-after-section'
-
 import { PricingSection } from '@/components/sections/pricing-section'
 import { FAQSection } from '@/components/sections/faq-section'
 import { CTASection } from '@/components/sections/cta-section'
