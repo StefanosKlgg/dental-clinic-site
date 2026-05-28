@@ -23,7 +23,7 @@ export default function HomePage() {
   return (
     <>
       <Header onBookClick={handleBookClick} lang={lang} onLangChange={setLang} />
-      
+
       <main>
         <HeroSection onBookClick={handleBookClick} lang={lang} />
         <ServicesSection onBookClick={handleBookClick} lang={lang} />
