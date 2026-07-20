@@ -119,14 +119,14 @@ export function HeroSection({ onBookClick, lang = 'el' }: HeroSectionProps) {
             <Button
               onClick={onBookClick}
               size="lg"
-              className="h-14 px-8 text-lg font-semibold shadow-xl hover:shadow-2xl hover:scale-105 transition-all w-full sm:w-auto justify-center"
+              className="h-14 px-8 text-lg font-bold bg-primary hover:bg-primary/95 text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 hover:-translate-y-0.5 active:translate-y-0 active:scale-98 transition-all duration-300 w-full sm:w-auto justify-center cursor-pointer"
             >
               {activeContent.ctaBook}
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="h-14 px-8 text-lg backdrop-blur-sm w-full sm:w-auto justify-center"
+              className="h-14 px-8 text-lg font-semibold bg-white/50 backdrop-blur-xs border border-slate-200 hover:border-slate-300/80 hover:bg-white/90 shadow-md shadow-slate-100/40 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-98 transition-all duration-300 w-full sm:w-auto justify-center cursor-pointer text-slate-700 hover:text-slate-800"
               asChild
             >
               <a href="#results">{activeContent.ctaResults}</a>

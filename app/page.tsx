@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
+import { MobileBottomBar } from '@/components/layout/mobile-bottom-bar'
 import { HeroSection } from '@/components/sections/hero-section'
 import { ServicesSection } from '@/components/sections/services-section'
 import { BeforeAfterSection } from '@/components/sections/before-after-section'
@@ -34,6 +35,9 @@ export default function HomePage() {
       </main>
 
       <Footer lang={lang} />
+
+      {/* Mobile Bottom Bar for CRO */}
+      <MobileBottomBar onBookClick={handleBookClick} lang={lang} />
 
       {/* Booking Dialog */}
       <BookingDialog open={bookingOpen} onOpenChange={setBookingOpen} lang={lang} />

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Menu, Phone, Globe } from 'lucide-react'
+import { Menu, Phone, Globe, Stethoscope, Sparkles, CreditCard, CircleHelp, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -74,12 +74,24 @@ export function Header({ onBookClick, lang: propLang, onLangChange }: HeaderProp
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-border/50'
-          : 'bg-transparent'
+          ? 'pt-3 px-4 sm:px-6'
+          : 'pt-0 px-0'
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+      <div 
+        className={cn(
+          'container mx-auto transition-all duration-300',
+          isScrolled
+            ? 'bg-white/80 backdrop-blur-md shadow-lg border border-slate-200/20 rounded-2xl px-4 sm:px-6 lg:px-8'
+            : 'px-4 sm:px-6 lg:px-8'
+        )}
+      >
+        <div 
+          className={cn(
+            'flex items-center justify-between transition-all duration-300',
+            isScrolled ? 'h-14 lg:h-16' : 'h-16 lg:h-20'
+          )}
+        >
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg">
@@ -154,37 +166,84 @@ export function Header({ onBookClick, lang: propLang, onLangChange }: HeaderProp
                 <span className="sr-only">{lang === 'el' ? 'Άνοιγμα μενού' : 'Open menu'}</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[350px]">
-              <SheetHeader>
-                <SheetTitle className="text-left">{lang === 'el' ? 'Μενού' : 'Menu'}</SheetTitle>
-              </SheetHeader>
-              <nav className="flex flex-col gap-4 mt-8">
-                {currentNavLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={handleNavClick}
-                    className="text-lg font-medium text-foreground hover:text-primary transition-colors py-2"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <hr className="my-4 border-border" />
+            <SheetContent 
+              side="right" 
+              className="w-[310px] sm:w-[360px] bg-gradient-to-b from-white via-white to-sky-50/30 border-l border-sky-100/40 shadow-2xl flex flex-col justify-between h-full p-0 gap-0"
+            >
+              {/* Header section with brand mark */}
+              <div className="px-6 pt-6 pb-4 border-b border-slate-100/50 flex items-center justify-between">
+                <SheetHeader className="p-0">
+                  <SheetTitle className="text-left text-lg font-bold tracking-tight text-secondary flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-md">
+                      <span className="text-primary-foreground font-bold text-sm">Ο</span>
+                    </div>
+                    <span>{lang === 'el' ? 'Μενού' : 'Menu'}</span>
+                  </SheetTitle>
+                </SheetHeader>
+              </div>
 
-                {/* Mobile Language Selector */}
-                <div className="flex items-center justify-between py-2">
-                  <div className="flex items-center gap-2 text-muted-foreground text-sm font-medium">
-                    <Globe className="w-4 h-4" />
-                    <span>{lang === 'el' ? 'Γλώσσα' : 'Language'}</span>
+              {/* Navigation Links */}
+              <div className="flex-1 overflow-y-auto px-6 py-6">
+                <nav className="flex flex-col gap-2">
+                  {currentNavLinks.map((link) => {
+                    let Icon = Sparkles;
+                    if (link.href === '#services') Icon = Stethoscope;
+                    else if (link.href === '#results') Icon = Sparkles;
+                    else if (link.href === '#pricing') Icon = CreditCard;
+                    else if (link.href === '#faq') Icon = CircleHelp;
+
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={handleNavClick}
+                        className="group flex items-center justify-between p-3 rounded-xl hover:bg-sky-50/40 active:bg-sky-50/80 border border-transparent hover:border-sky-100/30 transition-all duration-300"
+                      >
+                        <div className="flex items-center gap-3.5">
+                          <div className="w-9 h-9 rounded-lg bg-sky-50/60 group-hover:bg-primary/10 flex items-center justify-center text-primary group-hover:text-primary transition-colors shadow-xs">
+                            <Icon className="w-4.5 h-4.5 stroke-[2]" />
+                          </div>
+                          <span className="text-[15px] font-semibold text-slate-700 group-hover:text-primary transition-colors">
+                            {link.label}
+                          </span>
+                        </div>
+                        <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
+                      </Link>
+                    );
+                  })}
+                </nav>
+              </div>
+
+              {/* Bottom Action & Contact Block */}
+              <div className="p-6 bg-slate-50/80 border-t border-slate-100/80 flex flex-col gap-4">
+                {/* Phone Number */}
+                <a
+                  href="tel:+302101234567"
+                  className="flex items-center gap-3 p-3 rounded-xl bg-white/70 border border-slate-100 hover:border-slate-200/80 hover:bg-white text-slate-600 hover:text-primary transition-all duration-300 shadow-xs"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                    <Phone className="w-4 h-4 stroke-[2]" />
                   </div>
-                  <div className="flex items-center gap-1 bg-muted border border-border rounded-full p-0.5 text-xs font-semibold shadow-sm">
+                  <span className="text-[14px] font-semibold tracking-tight">+30 210 123 4567</span>
+                </a>
+
+                {/* Language Selector */}
+                <div className="flex items-center justify-between p-3 rounded-xl bg-white/70 border border-slate-100 shadow-xs">
+                  <div className="flex items-center gap-2.5 text-slate-500">
+                    <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center">
+                      <Globe className="w-4 h-4 stroke-[2]" />
+                    </div>
+                    <span className="text-[13px] font-semibold">{lang === 'el' ? 'Γλώσσα' : 'Language'}</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-0.5 bg-slate-100/80 p-0.5 rounded-lg border border-slate-200/30 text-xs font-bold">
                     <button
                       onClick={() => handleLanguageChange('el')}
                       className={cn(
-                        "px-3 py-1 rounded-full transition-all cursor-pointer",
+                        "px-3 py-1.5 rounded-md transition-all cursor-pointer",
                         lang === 'el' 
-                          ? "bg-primary text-primary-foreground shadow-sm font-semibold" 
-                          : "text-muted-foreground hover:text-foreground"
+                          ? "bg-white text-primary shadow-sm font-semibold border-b border-slate-200/40" 
+                          : "text-slate-500 hover:text-slate-800"
                       )}
                     >
                       EL
@@ -192,10 +251,10 @@ export function Header({ onBookClick, lang: propLang, onLangChange }: HeaderProp
                     <button
                       onClick={() => handleLanguageChange('en')}
                       className={cn(
-                        "px-3 py-1 rounded-full transition-all cursor-pointer",
+                        "px-3 py-1.5 rounded-md transition-all cursor-pointer",
                         lang === 'en' 
-                          ? "bg-primary text-primary-foreground shadow-sm font-semibold" 
-                          : "text-muted-foreground hover:text-foreground"
+                          ? "bg-white text-primary shadow-sm font-semibold border-b border-slate-200/40" 
+                          : "text-slate-500 hover:text-slate-800"
                       )}
                     >
                       EN
@@ -203,25 +262,18 @@ export function Header({ onBookClick, lang: propLang, onLangChange }: HeaderProp
                   </div>
                 </div>
 
-                <hr className="my-2 border-border" />
-                <a
-                  href="tel:+302101234567"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors py-2"
-                >
-                  <Phone className="w-5 h-5" />
-                  <span>+30 210 123 4567</span>
-                </a>
+                {/* Booking Button */}
                 <Button 
                   onClick={() => {
                     handleNavClick()
                     onBookClick?.()
                   }} 
                   size="lg" 
-                  className="mt-4 w-full"
+                  className="w-full py-6 rounded-xl font-bold bg-primary hover:bg-primary/95 text-white shadow-md hover:shadow-lg transition-all cursor-pointer text-[15px]"
                 >
                   {lang === 'el' ? 'Κλείστε Ραντεβού' : 'Book Appointment'}
                 </Button>
-              </nav>
+              </div>
             </SheetContent>
           </Sheet>
         </div>
